@@ -1,8 +1,8 @@
-# About Us
+# About Track Changes
 
 Welcome to our website! We're passionate about creating simple, effective solutions for our clients.
 
-## Our Mission
+## Track Changes Mission
 
 Our mission is to provide high-quality services while maintaining simplicity and transparency in everything we do.
 

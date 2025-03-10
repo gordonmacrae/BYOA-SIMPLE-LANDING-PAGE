@@ -25,8 +25,11 @@ files.forEach(file => {
     if (file.endsWith('.md')) {
         const markdown = fs.readFileSync(path.join(contentDir, file), 'utf-8');
         const html = convertMarkdownToHtml(markdown, template);
-        const outputFile = file === 'index.md' ? 'index.html' : file.replace('.md', '.html');
-        fs.writeFileSync(outputFile, html);
+        // Skip generating index.html from template since it's now a standalone file
+        if (file !== 'index.md') {
+            const outputFile = file.replace('.md', '.html');
+            fs.writeFileSync(outputFile, html);
+        }
     }
 });
 
