@@ -2,12 +2,11 @@ const fs = require('fs-extra');
 const path = require('path');
 const marked = require('marked');
 
-// Ensure build directory exists
-fs.ensureDirSync('dist');
-fs.ensureDirSync('dist/blog');
+// Ensure blog directory exists in root
+fs.ensureDirSync('blog');
 
-// Copy static assets
-fs.copySync('public', 'dist', { overwrite: true });
+// Copy static assets to root
+fs.copySync('public/css', 'css', { overwrite: true });
 
 // Convert markdown files to HTML
 function convertMarkdownToHtml(markdown, template) {
@@ -26,7 +25,7 @@ files.forEach(file => {
     if (file.endsWith('.md')) {
         const markdown = fs.readFileSync(path.join(contentDir, file), 'utf-8');
         const html = convertMarkdownToHtml(markdown, template);
-        const outputFile = path.join('dist', file === 'index.md' ? 'index.html' : file.replace('.md', '.html'));
+        const outputFile = file === 'index.md' ? 'index.html' : file.replace('.md', '.html');
         fs.writeFileSync(outputFile, html);
     }
 });
@@ -39,7 +38,7 @@ if (fs.existsSync(blogDir)) {
         if (file.endsWith('.md')) {
             const markdown = fs.readFileSync(path.join(blogDir, file), 'utf-8');
             const html = convertMarkdownToHtml(markdown, template);
-            const outputFile = path.join('dist', 'blog', file.replace('.md', '.html'));
+            const outputFile = path.join('blog', file.replace('.md', '.html'));
             fs.writeFileSync(outputFile, html);
         }
     });
